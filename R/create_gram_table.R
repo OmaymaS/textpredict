@@ -27,8 +27,8 @@ create_gram_table2 <- function(x,n){
                            ngram, txt,
                            token = "ngrams", n = n)
         g <- data.table(g)
-        g <- g[,.N,by=ngram]
-        g <- g[order(N,decreasing = T)]
+        g <- g[,list(r=.N),by=ngram]
+        g <- g[order(r,decreasing = T)]
 
         return(g)
 }
