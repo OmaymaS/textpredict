@@ -1,7 +1,7 @@
 #' Clean raw text
 #'
 #' @export
-clean_text <- function(x, profanity=profanity){
+clean_text <- function(x, profanity=""){
         y <- x %>%
                 stri_trans_general(.,id="latin-ascii") %>%
                 gsub("\\&","and",.) %>%
