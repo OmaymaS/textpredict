@@ -11,28 +11,29 @@ remove(news)
 
 set.seed(1205)
 
-intrain <- sample(seq_along(All_doc),0.7*length(All_doc), replace = F)
+intrain <- sample(seq_along(All_doc),0.001*length(All_doc), replace = F)
 trainx <- All_doc[intrain]
 
 # write
-writeLines(trainx,"../data-raw/dbs/train.txt")
+writeLines(trainx,"../data-raw/text_sample/train_sample.txt")
 
 remove(trainx)
 remove(intrain)
 
-corp70 <-  PCorpus(DirSource("../data-raw/dbs", encoding="UTF-8",mode="text"),
-                  dbControl=list(dbName="corx_newx.db", dbType="DB1"))
+# corp70 <-  PCorpus(DirSource("../data-raw/dbs", encoding="UTF-8",mode="text"),
+#                   dbControl=list(dbName="sample_text_70.db", dbType="DB1"))
 
 
-# corp70 <-  PCorpus(VectorSource(kk1),
-#                    dbControl=list(dbName="corx_newy.db", dbType="DB1"))
+corp_sample<-  PCorpus(DirSource("../data-raw/text_sample", encoding="UTF-8",mode="text"),
+                   dbControl=list(dbName="sample_text.db", dbType="DB1"))
 
-s <- Sys.time()
-corp5 <- tm_map(corp70, content_transformer(clean_text),profanity=profanity)
-Sys.time()-s
 
-write(corp5[[1]][[1]],"../data-raw/train_clean.txt")
+text_sample <- corp_sample[[1]][[1]]
 
-saveRDS(corp5[[1]][[1]],"../data-raw/train_clean.rds")
+devtools::use_data(text_sample)
+
+# write(corp5[[1]][[1]],"../data-raw/train_clean.txt")
+#
+# saveRDS(corp5[[1]][[1]],"../data-raw/train_clean.rds")
 
 
