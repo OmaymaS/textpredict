@@ -1,14 +1,33 @@
-#' Create n-gram tables with frequency - data.table implementation
-
+#' create_gram_table: Create n-gram tables with frequency - dataframe implementation
+#'
+#' @export
+#'
 create_gram_table <- function(x,n){
+
+        g <- unnest_tokens(data.frame(txt=x),
+                           ngram, txt,
+                           token = "ngrams", n = n) %>%
+                group_by(ngram) %>%
+                summarise(N=n()) %>%
+                arrange(desc(N))
+
+        return(g)
+}
+
+
+#' create_gram_table2: Create n-gram tables with frequency - data.table implementation
+#'
+#' @export
+#' @import data.table
+#'
+
+create_gram_table2 <- function(x,n){
 
         g <- unnest_tokens(data.frame(txt=x),
                            ngram, txt,
                            token = "ngrams", n = n)
         g <- data.table(g)
-        print(class(g))
         g <- g[,.N,by=ngram]
-
         g <- g[order(N,decreasing = T)]
 
         return(g)
