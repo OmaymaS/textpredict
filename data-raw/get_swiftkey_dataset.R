@@ -2,7 +2,7 @@ sk_url <- "https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-Sw
 
 if(!file.exists("data-raw/swiftkey_dataset/swiftkey.zip"))
 {
-        download.file(sk_url, destfile="data-raw/swiftkey_dataset/swiftkey.zip")
+        download.file(sk_url, destfile="./swiftkey_dataset/swiftkey.zip")
 }
 
 if(!file.exists("./swiftkey_dataset/swiftkey_unzipped"))
