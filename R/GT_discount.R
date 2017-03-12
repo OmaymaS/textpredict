@@ -6,14 +6,14 @@
 #'
 #' @export
 
-GT_discount <- function(df,freq=r,mx=6){
+GT_discount <- function(df,freq=r,mx=5){
         df %>%
                 group_by(r) %>%
                 summarise(Nr=n()) %>%
-                filter(r<=mx) %>%
+                filter(r<=mx+1) %>%
                 arrange(r) %>%
                 mutate(GT_discount=((r+1)/r)*(lead(Nr,1)/Nr)) %>%
-                head(.,mx-1)
+                head(.,mx)
 
 }
 
