@@ -5,11 +5,10 @@
 create_gram_table <- function(x, input_col, n){
 
         g <- tidytext::unnest_tokens(x, ngram, input_col,
-                                     token = "ngrams", n = n)
-        # %>%
-        #         group_by(ngram) %>%
-        #         summarise(N=n()) %>%
-        #         arrange(desc(N))
+                                     token = "ngrams", n = n)%>%
+                group_by(ngram) %>%
+                summarise(N=n()) %>%
+                arrange(desc(N))
 
         return(g)
 }
