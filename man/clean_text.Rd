@@ -4,7 +4,7 @@
 \alias{clean_text}
 \title{Clean raw text}
 \usage{
-clean_text(x, profanity = profanity)
+clean_text(x, profanity = "")
 }
 \description{
 Clean raw text

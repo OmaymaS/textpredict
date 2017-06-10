@@ -2,10 +2,10 @@
 % Please edit documentation in R/create_gram_table.R
 \name{create_gram_table}
 \alias{create_gram_table}
-\title{create_gram_table: Create n-gram tables with frequency - dataframe implementation}
+\title{create_gram_table: Create n-gram tables with frequency}
 \usage{
-create_gram_table(x, n)
+create_gram_table(x, col, n)
 }
 \description{
-create_gram_table: Create n-gram tables with frequency - dataframe implementation
+create_gram_table: Create n-gram tables with frequency
 }
