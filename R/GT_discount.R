@@ -6,7 +6,7 @@
 #'
 #' @export
 
-GT_discount <- function(df,freq=r,mx=5){
+gt_discount <- function(df,freq=r,mx=5){
         df %>%
                 group_by(r) %>%
                 summarise(Nr=n()) %>%
