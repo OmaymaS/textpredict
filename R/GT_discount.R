@@ -4,6 +4,13 @@
 #' @param freq name of freq column
 #' @param mx max freq to consider for GT discount
 #'
+#' @examples
+#'
+#' bigram_tbl <- create_gram_table(text_sample, 2) %>%
+#'   rename(bigram = ngram)
+#'
+#' bigrams_gt <- gt_discount(bigram_tbl, N)
+#'
 #' @export
 
 gt_discount <- function(df, N, mx=5){
