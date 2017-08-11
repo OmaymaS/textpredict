@@ -6,15 +6,17 @@
 #'
 #' @export
 
-gt_discount <- function(df,freq=r,mx=5){
-        df %>%
-                group_by(r) %>%
-                summarise(Nr=n()) %>%
-                filter(r<=mx+1) %>%
-                arrange(r) %>%
-                mutate(GT_discount=((r+1)/r)*(lead(Nr,1)/Nr)) %>%
-                head(.,mx)
+gt_discount <- function(df, N, mx=5){
 
+  freq <- enquo(N)
+
+  df %>%
+    group_by(!!N) %>%
+    summarise(Nr=n()) %>%
+    filter(!!N <= mx+1) %>%
+    arrange(!!N) %>%
+    mutate(GT_discount=(((!!N)+1)/(!!N))*(lead(Nr,1)/Nr)) %>%
+    head(., mx)
 }
 
 
