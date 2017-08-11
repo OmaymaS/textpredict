@@ -25,8 +25,8 @@ gt_discount <- function(df, N, mx=5){
     mutate(GT_discount=(((!!N)+1)/(!!N))*(lead(Nr,1)/Nr))
 
   # create lookup table
-  gt_lu <- df_gt$GT_discount[1:5]
-  names(gt_lu) <- df_gt$N[1:5]
+  gt_lu <- df_gt[["GT_discount"]][1:5]
+  names(gt_lu) <- df_gt %>% pull(!!N) %>% .[1:5]
 
   return(gt_lu)
 }
