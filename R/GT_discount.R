@@ -15,7 +15,7 @@
 
 gt_discount <- function(df, N, mx=5){
 
-  freq <- enquo(N)
+  N <- enquo(N)
 
   df %>%
     group_by(!!N) %>%
