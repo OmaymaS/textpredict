@@ -23,6 +23,7 @@ gt_discount <- function(df, N, mx=5){
     filter(!!N <= mx+1) %>%
     arrange(!!N) %>%
     mutate(GT_discount=(((!!N)+1)/(!!N))*(lead(Nr,1)/Nr)) %>%
+    select(-Nr) %>%
     head(., mx)
 }
 
