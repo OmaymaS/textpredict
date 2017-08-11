@@ -1,23 +1,30 @@
 #' create_gram_table: Create n-gram tables with frequency
 #'
+#' @param input_text character vector
+#' @param n ngram size
+#'
+#' @examples
+#'
+#' bigrams <- create_gram_table(text_sample, 2)
+#'
 #' @export
 #'
-create_gram_table <- function(x, input_col, n){
+create_gram_table <- function(input_txt, n){
 
-        g <- tidytext::unnest_tokens(x, ngram, input_col,
-                                     token = "ngrams", n = n)%>%
-                group_by(ngram) %>%
-                summarise(N=n()) %>%
-                arrange(desc(N))
+  x <- data_frame(txt = input_txt)
 
-        return(g)
+  g <- tidytext::unnest_tokens(x, ngram, txt,
+                               token = "ngrams", n = n) %>%
+    group_by(ngram) %>%
+    summarise(N=n()) %>%
+    arrange(desc(N))
+
+  return(g)
 }
 
 
 #' create_gram_table2: Create n-gram tables with frequency - data.table implementation
 #'
-
-
 
 # create_gram_table2 <- function(x,n){
 #
