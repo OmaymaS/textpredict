@@ -9,7 +9,11 @@
 #'
 #' @export
 #'
-create_gram_table <- function(input_txt, n, freq_col){
+create_gram_table <- function(input_txt, n, gram_col, freq_col){
+
+  gram_col <- enquo(gram_col)
+  gram_col_name <- quo_name(gram_col)
+
   freq_col <- enquo(freq_col)
   freq_col_name <- quo_name(freq_col)
 
@@ -17,9 +21,11 @@ create_gram_table <- function(input_txt, n, freq_col){
 
   g <- tidytext::unnest_tokens(x, ngram, txt,
                                token = "ngrams", n = n) %>%
-    group_by(ngram) %>%
+    rename(!!gram_col_name := ngram) %>%
+    group_by(!!gram_col) %>%
     summarise( !!freq_col_name := n()) %>%
     arrange(desc( !!freq_col))
+
 
   return(g)
 }
