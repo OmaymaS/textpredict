@@ -17,14 +17,18 @@ gt_discount <- function(df, N, mx=5){
 
   N <- enquo(N)
 
-  df %>%
+  df_gt <- df %>%
     group_by(!!N) %>%
     summarise(Nr=n()) %>%
     filter(!!N <= mx+1) %>%
     arrange(!!N) %>%
-    mutate(GT_discount=(((!!N)+1)/(!!N))*(lead(Nr,1)/Nr)) %>%
-    select(-Nr) %>%
-    head(., mx)
+    mutate(GT_discount=(((!!N)+1)/(!!N))*(lead(Nr,1)/Nr))
+
+  # create lookup table
+  gt_lu <- df_gt$GT_discount[1:5]
+  names(gt_lu) <- df_gt$N[1:5]
+
+  return(gt_lu)
 }
 
 
